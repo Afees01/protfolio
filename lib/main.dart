@@ -1,53 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/services.dart';
+import 'dart:ui';
+import 'dart:math' as math;
+import 'package:google_fonts/google_fonts.dart';
 
-import 'bloc/portfolio_bloc.dart';
-import 'bloc/portfolio_event.dart';
+part 'theme.dart';
+part 'main_shell.dart';
+part 'shared_components.dart';
+part 'screens/home_page.dart';
+part 'screens/works_page.dart';
+part 'screens/case_study_page.dart';
+part 'screens/about_page.dart';
+part 'screens/contact_page.dart';
 
-import 'sections/home_section.dart';
-import 'sections/about_section.dart';
-import 'sections/skills_section.dart';
-import 'sections/projects_section.dart';
-import 'sections/contact_section.dart';
 
 void main() {
-  runApp(const MyPortfolio());
+  runApp(const FlutterArchitectApp());
 }
 
-class MyPortfolio extends StatelessWidget {
-  const MyPortfolio({super.key});
+// ─────────────────────────── APP ROOT ───────────────────────────
+class FlutterArchitectApp extends StatelessWidget {
+  const FlutterArchitectApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+    ));
     return MaterialApp(
-      title: "Afees Portfolio",
+      title: 'Flutter Developer',
       debugShowCheckedModeBanner: false,
-      home: BlocProvider(
-        create: (_) => PortfolioBloc()..add(LoadProjects()),
-        child: const PortfolioPage(),
-      ),
-    );
-  }
-}
-
-class PortfolioPage extends StatelessWidget {
-  const PortfolioPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Afees K A")),
-      body: const SingleChildScrollView(
-        child: Column(
-          children: [
-            HomeSection(),
-            AboutSection(),
-            SkillsSection(),
-            ProjectsSection(),
-            ContactSection(),
-          ],
+      theme: ThemeData(
+        colorScheme: const ColorScheme.dark(
+          background: AppColors.background,
+          surface: AppColors.surface,
+          primary: AppColors.primary,
+          secondary: AppColors.secondary,
         ),
+        scaffoldBackgroundColor: AppColors.background,
+        textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
+        useMaterial3: true,
       ),
+      home: const MainShell(),
     );
   }
 }
+
