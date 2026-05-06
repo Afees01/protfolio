@@ -20,47 +20,39 @@ class GlassCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final br = borderRadius ?? BorderRadius.circular(16);
+
     return ClipRRect(
       borderRadius: br,
-      child: Stack(
-        children: [
-          Container(
-            color: Colors.black.withOpacity(0.1),
-          ),
-          BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: blurSigma, sigmaY: blurSigma),
-            child: Container(
-              padding: padding,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.05),
-                borderRadius: br,
-                border: Border(
-                  top: const BorderSide(color: Color(0x33FFFFFF), width: 1),
-                  left: BorderSide(
-                    color: borderColor ?? const Color(0x1AFFFFFF),
-                    width: 1,
-                  ),
-                  right: BorderSide(
-                    color: borderColor ?? const Color(0x1AFFFFFF),
-                    width: 1,
-                  ),
-                  bottom: BorderSide(
-                    color: borderColor ?? const Color(0x1AFFFFFF),
-                    width: 1,
-                  ),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.primaryContainer.withOpacity(0.12),
-                    blurRadius: 32,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-              ),
-              child: child,
+      child: BackdropFilter(
+        filter: ImageFilter.blur(
+          sigmaX: blurSigma,
+          sigmaY: blurSigma,
+        ),
+        child: Container(
+          padding: padding,
+          decoration: BoxDecoration(
+            borderRadius: br,
+
+            // GLASS EFFECT
+            color: Colors.white.withOpacity(0.08),
+
+            // FIXED BORDER
+            border: Border.all(
+              color: borderColor ?? Colors.white.withOpacity(0.15),
+              width: 1,
             ),
+
+            // SHADOW
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.15),
+                blurRadius: 24,
+                offset: const Offset(0, 8),
+              ),
+            ],
           ),
-        ],
+          child: child,
+        ),
       ),
     );
   }
