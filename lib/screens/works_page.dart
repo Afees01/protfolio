@@ -13,45 +13,33 @@ class _WorksPageState extends State<WorksPage> {
 
   final _projects = [
     _ProjectData(
-        'Nexus Flux',
-        'Advanced data visualization engine with Canvas-based animations for real-time market insights.',
-        98,
-        ['Mobile', 'Web'],
-        [Icons.smartphone_outlined, Icons.laptop_outlined]),
+        'Event Management App',
+        'Full-stack Flutter application with Node.js backend, MySQL database. Role-based system for admin and users with RESTful APIs, token-based authentication, and image upload functionality.',
+        96,
+        ['Mobile'],
+        [Icons.smartphone_outlined]),
     _ProjectData(
-        'SynchroSync',
-        'Real-time Firestore synchronization for multi-window desktop apps with low-latency caching.',
-        100,
-        ['Desktop', 'Open Source'],
-        [Icons.desktop_windows_outlined]),
+        'Todo App',
+        'Full-stack mobile Todo application using Flutter with BLoC state management. Firebase Authentication and Supabase integration for real-time CRUD operations and task management.',
+        94,
+        ['Mobile'],
+        [Icons.smartphone_outlined]),
     _ProjectData(
-        'Velo Engine',
-        'High-performance physics-based animation library optimizing frame rates for complex interactions.',
+        'Appointment Viewer',
+        'Flutter membership app with subscription management and therapist appointment booking. Custom checkout flow for digital product purchases and membership upgrades.',
         92,
         ['Mobile'],
         [Icons.smartphone_outlined]),
     _ProjectData(
-        'Glass UI Kit',
-        'Universal widget library implementing glassmorphism across all Flutter-supported platforms.',
-        95, [
-      'Mobile',
-      'Web',
-      'Desktop'
-    ], [
-      Icons.smartphone_outlined,
-      Icons.laptop_outlined,
-      Icons.desktop_windows_outlined
-    ]),
+        'Consent Form Application',
+        'Flutter tablet app for patient document signing and digital declarations. Integrated signature capture, secure data handling, and responsive tablet design for hospital use.',
+        93,
+        ['Mobile'],
+        [Icons.tablet_outlined]),
     _ProjectData(
-        'Web Archon',
-        'Enterprise-scale web admin dashboard with SEO optimization and custom routing.',
-        89,
-        ['Web'],
-        [Icons.laptop_outlined]),
-    _ProjectData(
-        'SecureVault',
-        'Biometric authentication framework with end-to-end encryption for iOS and Android.',
-        97,
+        'Call Patient App',
+        'Hospital communication app integrated with hospital management software. One-click call feature that fetches patient numbers with FCM token integration for secure data retrieval.',
+        91,
         ['Mobile'],
         [Icons.smartphone_outlined]),
   ];
@@ -80,8 +68,7 @@ class _WorksPageState extends State<WorksPage> {
                       shaderCallback: (b) => const LinearGradient(
                         colors: [AppColors.primary, AppColors.secondary],
                       ).createShader(b),
-                      child: Text('Portfolio',
-                          style: AppTextStyles.displayLg),
+                      child: Text('Portfolio', style: AppTextStyles.displayLg),
                     ),
                   ),
                 ],

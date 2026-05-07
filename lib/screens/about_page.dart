@@ -70,7 +70,7 @@ class _AboutHero extends StatelessWidget {
                   children: [
                     const Icon(Icons.verified, size: 14, color: Colors.black),
                     const SizedBox(width: 6),
-                    Text('Dart Expert',
+                    Text('Flutter Developer',
                         style: AppTextStyles.labelSm.copyWith(
                           color: Colors.black,
                           fontWeight: FontWeight.w700,
@@ -90,17 +90,17 @@ class _AboutHero extends StatelessWidget {
             text: TextSpan(
               style: AppTextStyles.displayLg,
               children: [
-                const TextSpan(text: 'Architecting seamless '),
+                const TextSpan(text: 'Building '),
                 const TextSpan(
-                    text: 'Cross-Platform',
+                    text: 'Responsive',
                     style: TextStyle(color: AppColors.primary)),
-                const TextSpan(text: ' experiences.'),
+                const TextSpan(text: ' Cross-Platform experiences.'),
               ],
             ),
           ),
           const SizedBox(height: 20),
           Text(
-            'Senior Flutter Engineer specialized in building high-performance, scalable applications that feel native on every screen. From intricate animations to robust architecture, I bridge the gap between complex logic and beautiful UI.',
+            'Motivated Flutter Developer with proven expertise in building responsive, user-friendly mobile applications. Strong in UI design, API integration, Firebase services, state management with BLoC, and creating scalable architectures that deliver exceptional user experiences.',
             style: AppTextStyles.bodyMd,
           ),
           const SizedBox(height: 32),
@@ -161,28 +161,28 @@ class _WidgetTree extends StatelessWidget {
   Widget build(BuildContext context) {
     final skills = [
       (
-        'Flutter Core',
-        Icons.layers_outlined,
+        'UI Design',
+        Icons.palette_outlined,
         AppColors.primary,
-        ['Custom Painting', 'Render Objects', 'Micro-interactions']
+        ['Responsive Layouts', 'Modern Components', 'User Experience']
+      ),
+      (
+        'API Integration',
+        Icons.api_outlined,
+        AppColors.secondary,
+        ['RESTful APIs', 'Firebase Integration', 'Supabase Backend']
       ),
       (
         'State Management',
         Icons.account_tree_outlined,
-        AppColors.secondary,
-        ['BLoC / RxDart', 'Riverpod', 'Clean Architecture']
-      ),
-      (
-        'Platform Channels',
-        Icons.terminal_outlined,
         AppColors.tertiary,
-        ['Method Channels', 'Swift/Kotlin Interop', 'FFI Integration']
+        ['BLoC Pattern', 'Clean Architecture', 'Scalable Design']
       ),
       (
-        'CI/CD',
-        Icons.bolt_outlined,
+        'Databases',
+        Icons.storage_outlined,
         AppColors.error,
-        ['Codemagic / GH Actions', 'Fastlane Automation', 'Automated Testing']
+        ['Firebase/Firestore', 'MySQL', 'Real-time Sync']
       ),
     ];
 
@@ -266,20 +266,20 @@ class _Timeline extends StatelessWidget {
   Widget build(BuildContext context) {
     final items = [
       _TimelineItem(
-          '2022 — Present',
-          'Lead Flutter Architect @ TechFlow',
+          '2025 — Present',
+          'Flutter Developer @ Kaizen Star Technologies LLC',
           AppColors.primary,
-          'Leading 12 engineers migrating a monolithic app to Flutter, serving 2M+ active users. Implementing modular design systems and custom rendering engines.'),
+          'Delivering responsive technical support and improving app stability. Developing detailed documentation for Flutter features, API usage, and UI components. Actively collaborating with designers, backend developers, and project managers.'),
       _TimelineItem(
-          '2020 — 2022',
-          'Senior Mobile Developer @ InnovateHQ',
+          '2024',
+          'Flutter Developer Intern @ Luminar Technolab',
           AppColors.secondary,
-          'Architected fintech applications with high-security standards and real-time data visualization using custom-painter charts.'),
+          'Developed and maintained mobile apps using Flutter for real-world client projects. Supported app troubleshooting, bug fixing, and feature testing. Participated in full app design, development, and deployment processes.'),
       _TimelineItem(
-          '2018 — 2020',
-          'Full Stack Engineer @ StartupLabs',
+          '2021 — 2024',
+          'Bachelor of Science in Computer Science',
           AppColors.outline,
-          'Early Flutter Beta adopter. Shipped 3 MVP products to both iOS and Android within aggressive 3-month timelines.'),
+          'KMM College Of Arts And Science, Thrikkakkara | Mahatma Gandhi University'),
     ];
 
     return LayoutBuilder(builder: (ctx, constraints) {

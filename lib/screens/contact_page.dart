@@ -197,11 +197,11 @@ class _ConsoleFormState extends State<_ConsoleForm> {
                     LayoutBuilder(builder: (ctx, constraints) {
                       final isWide = constraints.maxWidth > 500;
                       final nameField = _ConsoleField(
-                          label: 'String clientName',
+                          label: 'Name',
                           hint: 'Your Name',
                           controller: _nameController);
                       final emailField = _ConsoleField(
-                          label: 'String clientEmail',
+                          label: 'Email',
                           hint: 'dev@universe.io',
                           controller: _emailController);
                       if (isWide) {
@@ -220,7 +220,7 @@ class _ConsoleFormState extends State<_ConsoleForm> {
                       ]);
                     }),
                     const SizedBox(height: 28),
-                    const _ConsoleLabel('ProjectType selection = ProjectType.'),
+                    const _ConsoleLabel('Select Project Category'),
                     const SizedBox(height: 12),
                     Row(
                       children: [
@@ -250,7 +250,7 @@ class _ConsoleFormState extends State<_ConsoleForm> {
                       ],
                     ),
                     const SizedBox(height: 28),
-                    const _ConsoleLabel('Future<void> projectBrief() {'),
+                    const _ConsoleLabel('Project Brief'),
                     const SizedBox(height: 10),
                     Container(
                       decoration: BoxDecoration(
@@ -273,7 +273,7 @@ class _ConsoleFormState extends State<_ConsoleForm> {
                           controller: _messageController,
                           maxLines: 6,
                           decoration: InputDecoration(
-                            hintText: 'Describe your architectural vision...',
+                            hintText: 'Tell me about the project',
                             hintStyle: TextStyle(
                                 color: Color(0x66C2C6D2),
                                 fontFamily: GoogleFonts.inter().fontFamily,
@@ -288,12 +288,6 @@ class _ConsoleFormState extends State<_ConsoleForm> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 6),
-                    Text('}',
-                        style: TextStyle(
-                            color: AppColors.onSurfaceVariant,
-                            fontFamily: GoogleFonts.inter().fontFamily,
-                            fontSize: 14)),
                     const SizedBox(height: 28),
                     Align(
                       alignment: Alignment.centerRight,
@@ -491,8 +485,8 @@ class _ContactSidebar extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Alex Rivero', style: AppTextStyles.titleLg),
-                      Text('Lead Flutter Architect',
+                      Text('AFEES K A', style: AppTextStyles.titleLg),
+                      Text('Flutter Developer',
                           style: AppTextStyles.labelSm.copyWith(
                               color: AppColors.secondary, letterSpacing: 0.5)),
                     ],
@@ -503,7 +497,7 @@ class _ContactSidebar extends StatelessWidget {
               ...[
                 ('GitHub', Icons.code_outlined),
                 ('LinkedIn', Icons.hub_outlined),
-                ('Twitter', Icons.chat_bubble_outline),
+                ('Email', Icons.mail_outline),
               ].map((item) => _SocialLink(item.$1, item.$2)),
             ],
           ),
@@ -558,7 +552,7 @@ class _ContactSidebar extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('DEPLOYMENT TARGETS',
+              Text('TECH STACK',
                   style: AppTextStyles.labelSm.copyWith(letterSpacing: 2)),
               const SizedBox(height: 16),
               Wrap(
@@ -566,9 +560,9 @@ class _ContactSidebar extends StatelessWidget {
                 runSpacing: 8,
                 children: [
                   _Chip(label: 'iOS / Android', color: AppColors.primary),
-                  _Chip(label: 'Web (WASM)', color: AppColors.secondary),
-                  _Chip(label: 'Desktop (Linux)', color: AppColors.tertiary),
-                  _Chip(label: 'Embedded', color: AppColors.onSurfaceVariant),
+                  _Chip(label: 'Firebase', color: AppColors.secondary),
+                  _Chip(label: 'Supabase', color: AppColors.tertiary),
+                  _Chip(label: 'REST APIs', color: AppColors.onSurfaceVariant),
                 ],
               ),
             ],

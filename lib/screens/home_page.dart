@@ -84,7 +84,7 @@ class _HeroText extends StatelessWidget {
           text: TextSpan(
             style: AppTextStyles.displayLg,
             children: [
-              const TextSpan(text: 'Building '),
+              const TextSpan(text: 'Hey, I\'m '),
               WidgetSpan(
                 child: ShaderMask(
                   shaderCallback: (bounds) => const LinearGradient(
@@ -95,18 +95,18 @@ class _HeroText extends StatelessWidget {
                     ],
                   ).createShader(bounds),
                   child: Text(
-                    'Multi-Platform\nMasterpieces',
+                    'AFEES K A',
                     style: AppTextStyles.displayLg,
                   ),
                 ),
               ),
-              const TextSpan(text: '\nwith Dart & Flutter'),
+              const TextSpan(text: '.\nFlutter Developer'),
             ],
           ),
         ),
         const SizedBox(height: 20),
         Text(
-          'Crafting high-performance, visually stunning applications that run seamlessly on Mobile, Web, and Desktop from a single codebase.',
+          'Passionate Flutter developer with 1.2+ years of experience building responsive, user-friendly cross-platform mobile applications for Android and iOS. Specialized in Firebase, Supabase, BLoC state management, and modern UI design.',
           style: AppTextStyles.bodyMd,
         ),
         const SizedBox(height: 32),
