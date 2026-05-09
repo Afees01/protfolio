@@ -1,5 +1,6 @@
 part of '../main.dart';
 
+
 // ─────────────────────────── WORKS PAGE ───────────────────────────
 class WorksPage extends StatefulWidget {
   const WorksPage({super.key});
@@ -76,7 +77,7 @@ class _WorksPageState extends State<WorksPage> {
             ),
             const SizedBox(height: 12),
             Text(
-              'Showcasing high-performance applications built with Flutter — from complex custom canvas animations to real-time distributed systems.',
+              'A showcase of Flutter apps built for performance, polish, and real user needs.',
               style: AppTextStyles.bodyMd,
             ),
             const SizedBox(height: 32),

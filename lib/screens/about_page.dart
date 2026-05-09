@@ -18,8 +18,6 @@ class AboutPage extends StatelessWidget {
             const SizedBox(height: 64),
             _Timeline(),
             const SizedBox(height: 64),
-            _OpenSource(),
-            const SizedBox(height: 64),
             _Philosophy(),
             const SizedBox(height: 80),
           ],
@@ -27,6 +25,14 @@ class AboutPage extends StatelessWidget {
       ),
     );
   }
+}
+
+void downloadCV() {
+  html.AnchorElement(
+    href: 'assets/pdf/CV.pdf',
+  )
+    ..setAttribute('download', 'Afees KA CV.pdf')
+    ..click();
 }
 
 class _AboutHero extends StatelessWidget {
@@ -92,15 +98,15 @@ class _AboutHero extends StatelessWidget {
               children: [
                 const TextSpan(text: 'Building '),
                 const TextSpan(
-                    text: 'Responsive',
+                    text: 'beautiful, responsive apps',
                     style: TextStyle(color: AppColors.primary)),
-                const TextSpan(text: ' Cross-Platform experiences.'),
+                const TextSpan(text: ' that feel great on every device.'),
               ],
             ),
           ),
           const SizedBox(height: 20),
           Text(
-            'Motivated Flutter Developer with proven expertise in building responsive, user-friendly mobile applications. Strong in UI design, API integration, Firebase services, state management with BLoC, and creating scalable architectures that deliver exceptional user experiences.',
+            'I create Flutter experiences that are easy to use, polished, and fast. From clean UI layouts to smooth backend integration, I build apps that help people get things done with confidence.',
             style: AppTextStyles.bodyMd,
           ),
           const SizedBox(height: 32),
@@ -109,9 +115,24 @@ class _AboutHero extends StatelessWidget {
               _PrimaryButton(
                 label: 'Download CV',
                 icon: const Icon(Icons.download, color: Colors.white, size: 18),
+                onTap: downloadCV,
               ),
               const SizedBox(width: 16),
-              const _GhostButton(label: 'View Projects'),
+              _GhostButton(
+                label: 'View Projects',
+                onTap: () {
+                  final shell = MainShell.of(context);
+                  if (shell != null) {
+                    shell.scrollToSection(1);
+                  } else {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const WorksPage()),
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ],
@@ -161,28 +182,28 @@ class _WidgetTree extends StatelessWidget {
   Widget build(BuildContext context) {
     final skills = [
       (
-        'UI Design',
+        'Visual Design',
         Icons.palette_outlined,
         AppColors.primary,
-        ['Responsive Layouts', 'Modern Components', 'User Experience']
+        ['Responsive layouts', 'Modern components', 'Accessible UI']
       ),
       (
-        'API Integration',
+        'API & Data',
         Icons.api_outlined,
         AppColors.secondary,
-        ['RESTful APIs', 'Firebase Integration', 'Supabase Backend']
+        ['RESTful services', 'Firebase integration', 'Clean data flows']
       ),
       (
-        'State Management',
+        'App State',
         Icons.account_tree_outlined,
         AppColors.tertiary,
-        ['BLoC Pattern', 'Clean Architecture', 'Scalable Design']
+        ['BLoC patterns', 'Organized architecture', 'Predictable behavior']
       ),
       (
-        'Databases',
+        'Data & Storage',
         Icons.storage_outlined,
         AppColors.error,
-        ['Firebase/Firestore', 'MySQL', 'Real-time Sync']
+        ['Firestore sync', 'Local caching', 'Real-time updates']
       ),
     ];
 
@@ -191,9 +212,9 @@ class _WidgetTree extends StatelessWidget {
       children: [
         const _SectionHeader(
           label: 'Skills',
-          title: 'The Widget Tree',
+          title: 'What I Build',
           subtitle:
-              'Technical proficiency mapped across the Flutter ecosystem.',
+              'Flutter strengths focused on clean design, reliable APIs, and smooth app behavior.',
         ),
         const SizedBox(height: 24),
         LayoutBuilder(builder: (ctx, constraints) {
@@ -266,20 +287,23 @@ class _Timeline extends StatelessWidget {
   Widget build(BuildContext context) {
     final items = [
       _TimelineItem(
-          '2025 — Present',
-          'Flutter Developer @ Kaizen Star Technologies LLC',
-          AppColors.primary,
-          'Delivering responsive technical support and improving app stability. Developing detailed documentation for Flutter features, API usage, and UI components. Actively collaborating with designers, backend developers, and project managers.'),
+        '2025 — Present',
+        'Flutter Developer @ Kaizen Star Technologies LLC',
+        AppColors.primary,
+        'Building reliable Flutter apps, improving performance, and working closely with designers and backend teams. Writing clear documentation and sharing best practices across the project.',
+      ),
       _TimelineItem(
-          '2024',
-          'Flutter Developer Intern @ Luminar Technolab',
-          AppColors.secondary,
-          'Developed and maintained mobile apps using Flutter for real-world client projects. Supported app troubleshooting, bug fixing, and feature testing. Participated in full app design, development, and deployment processes.'),
+        '2024',
+        'Flutter Developer Intern @ Luminar Technolab',
+        AppColors.secondary,
+        'Created and tested Flutter apps for real clients, helped fix issues, and supported the release process from concept to launch.',
+      ),
       _TimelineItem(
-          '2021 — 2024',
-          'Bachelor of Science in Computer Science',
-          AppColors.outline,
-          'KMM College Of Arts And Science, Thrikkakkara | Mahatma Gandhi University'),
+        '2021 — 2024',
+        'Bachelor of Science in Computer Science',
+        AppColors.outline,
+        'KMM College Of Arts And Science, Thrikkakkara | Mahatma Gandhi University',
+      ),
     ];
 
     return LayoutBuilder(builder: (ctx, constraints) {
@@ -293,10 +317,11 @@ class _Timeline extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const _SectionHeader(label: 'History', title: 'Career.dart'),
+                  const _SectionHeader(
+                      label: 'Experience', title: 'My Journey'),
                   const SizedBox(height: 16),
                   Text(
-                    'A sequence of architectural milestones in the mobile engineering space.',
+                    'A simple timeline of work, learning, and growth in mobile development.',
                     style: AppTextStyles.bodyMd,
                   ),
                 ],
@@ -378,103 +403,6 @@ class _TimelineCard extends StatelessWidget {
   }
 }
 
-class _OpenSource extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final projects = [
-      (
-        'flutter_glass_kit',
-        Icons.terminal_outlined,
-        '1.2k',
-        'High-performance glassmorphism toolkit with dynamic blurring and real-time light simulation.',
-        ['Flutter', 'Dart', 'UI Library']
-      ),
-      (
-        'bloc_persistence_layer',
-        Icons.account_tree_outlined,
-        '850',
-        'Lightweight abstraction for automated local caching and hydration for BLoC state patterns.',
-        ['State Mgmt', 'Architecture', 'Core']
-      ),
-    ];
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const _SectionHeader(label: 'OSS', title: 'Open Source Contributions'),
-        const SizedBox(height: 24),
-        LayoutBuilder(builder: (ctx, constraints) {
-          if (constraints.maxWidth > 600) {
-            return Row(
-              children: projects
-                  .map((p) => Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: _OSSCard(p.$1, p.$2, p.$3, p.$4, p.$5),
-                        ),
-                      ))
-                  .toList(),
-            );
-          }
-          return Column(
-            children: projects
-                .map((p) => Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: _OSSCard(p.$1, p.$2, p.$3, p.$4, p.$5),
-                    ))
-                .toList(),
-          );
-        }),
-      ],
-    );
-  }
-}
-
-class _OSSCard extends StatelessWidget {
-  final String name;
-  final IconData icon;
-  final String stars;
-  final String desc;
-  final List<String> tags;
-  const _OSSCard(this.name, this.icon, this.stars, this.desc, this.tags);
-  @override
-  Widget build(BuildContext context) {
-    return GlassCard(
-      borderRadius: BorderRadius.circular(20),
-      padding: const EdgeInsets.all(28),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(icon, color: AppColors.primary, size: 32),
-              const Spacer(),
-              const Icon(Icons.star_rounded,
-                  color: AppColors.tertiary, size: 16),
-              const SizedBox(width: 4),
-              Text(stars,
-                  style: AppTextStyles.titleLg
-                      .copyWith(fontSize: 14, color: AppColors.tertiary)),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Text(name, style: AppTextStyles.titleLg),
-          const SizedBox(height: 8),
-          Text(desc, style: AppTextStyles.bodyMd),
-          const SizedBox(height: 20),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: tags
-                .map((t) => _Chip(label: t, color: AppColors.primary))
-                .toList(),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _Philosophy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -492,11 +420,10 @@ class _Philosophy extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const _SectionHeader(
-                  label: 'Vision', title: 'Cross-Platform Philosophy'),
+              const _SectionHeader(label: 'Approach', title: 'How I Work'),
               const SizedBox(height: 20),
               Text(
-                '"Code should be written once and deployed everywhere, but it should never feel generic. True cross-platform excellence lies in respecting the platform\'s specific design language while maintaining a unified brand core. My approach focuses on shared logic, unique expression."',
+                'I believe great apps should feel natural on every device while staying easy to build and maintain. I focus on shared Flutter logic, thoughtful UI, and fast, accessible experiences.',
                 style: AppTextStyles.bodyMd,
               ),
               const SizedBox(height: 24),
@@ -522,9 +449,9 @@ class _Philosophy extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Unified UI/UX Engine',
+                      Text('One codebase, many platforms',
                           style: AppTextStyles.titleLg.copyWith(fontSize: 16)),
-                      Text('Driven by Performance & Accessibility',
+                      Text('Built for speed, clarity, and ease of use',
                           style: AppTextStyles.bodyMd.copyWith(fontSize: 13)),
                     ],
                   ),

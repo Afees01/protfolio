@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'dart:ui';
 import 'dart:math' as math;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'dart:html' as html;
 
 part 'theme.dart';
 part 'main_shell.dart';
@@ -12,7 +14,6 @@ part 'screens/works_page.dart';
 part 'screens/case_study_page.dart';
 part 'screens/about_page.dart';
 part 'screens/contact_page.dart';
-
 
 void main() {
   runApp(const FlutterArchitectApp());
@@ -46,4 +47,3 @@ class FlutterArchitectApp extends StatelessWidget {
     );
   }
 }
-

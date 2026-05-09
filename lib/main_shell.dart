@@ -1,14 +1,21 @@
 part of 'main.dart';
 
 // ─────────────────────────── MAIN SHELL ───────────────────────────
+abstract class MainShellNavigator {
+  Future<void> scrollToSection(int index);
+}
+
 class MainShell extends StatefulWidget {
   const MainShell({super.key});
+
+  static MainShellNavigator? of(BuildContext context) =>
+      context.findAncestorStateOfType<_MainShellState>();
 
   @override
   State<MainShell> createState() => _MainShellState();
 }
 
-class _MainShellState extends State<MainShell> {
+class _MainShellState extends State<MainShell> implements MainShellNavigator {
   int _currentIndex = 0;
   final ScrollController _scrollController = ScrollController();
   final List<GlobalKey> _keys = List.generate(5, (_) => GlobalKey());
@@ -60,14 +67,16 @@ class _MainShellState extends State<MainShell> {
     }
   }
 
-  void _scrollToIndex(int index) async {
+  @override
+  Future<void> scrollToSection(int index) async {
     setState(() => _currentIndex = index);
     final context = _keys[index].currentContext;
     if (context != null) {
       _isScrolling = true;
       final box = context.findRenderObject() as RenderBox;
-      double offset = _scrollController.offset + box.localToGlobal(Offset.zero).dy - 72;
-      
+      double offset =
+          _scrollController.offset + box.localToGlobal(Offset.zero).dy - 72;
+
       // Prevent scrolling beyond max extent
       offset = math.min(offset, _scrollController.position.maxScrollExtent);
       // Prevent scrolling before 0
@@ -108,7 +117,7 @@ class _MainShellState extends State<MainShell> {
             child: _TopNavBar(
               currentIndex: _currentIndex,
               navItems: _navItems,
-              onTap: _scrollToIndex,
+              onTap: scrollToSection,
             ),
           ),
           // FAB
@@ -116,7 +125,7 @@ class _MainShellState extends State<MainShell> {
             bottom: 28,
             right: 28,
             child: _FloatingActionBtn(
-              onTap: () => _scrollToIndex(4),
+              onTap: () => scrollToSection(4),
             ),
           ),
         ],

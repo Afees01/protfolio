@@ -72,7 +72,7 @@ class _ConsoleFormState extends State<_ConsoleForm> {
           backgroundColor: AppColors.surfaceContainerHigh,
           title: const Text('Error', style: TextStyle(color: AppColors.error)),
           content: const Text(
-              'Missing required parameters in payload. Please fill all fields.',
+              'Please fill in all fields before sending your message.',
               style: TextStyle(color: Colors.white)),
           actions: [
             TextButton(
@@ -111,7 +111,7 @@ class _ConsoleFormState extends State<_ConsoleForm> {
           title: const Text('Success',
               style: TextStyle(color: AppColors.secondary)),
           content: const Text(
-              'Signal transmitted successfully. Stand by for response.',
+              'Your message has been sent! I’ll review it and reply soon.',
               style: TextStyle(color: Colors.white)),
           actions: [
             TextButton(
@@ -137,7 +137,7 @@ class _ConsoleFormState extends State<_ConsoleForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Connect With Developer',
+        Text('Let’s build something together',
             style: AppTextStyles.displayLg.copyWith(fontSize: 36)),
         const SizedBox(height: 12),
         Row(
@@ -147,10 +147,10 @@ class _ConsoleFormState extends State<_ConsoleForm> {
             const SizedBox(width: 8),
             Text(
                 _isSuccess
-                    ? 'STATUS: TRANSMISSION SUCCESSFUL'
+                    ? 'Message sent successfully'
                     : (_isSubmitting
-                        ? 'STATUS: TRANSMITTING SIGNAL...'
-                        : 'STATUS: AWAITING SIGNAL TRANSMISSION'),
+                        ? 'Sending your message...'
+                        : 'Ready when you are'),
                 style: AppTextStyles.labelSm.copyWith(
                     color:
                         _isSuccess ? AppColors.secondary : AppColors.tertiary)),
@@ -179,7 +179,7 @@ class _ConsoleFormState extends State<_ConsoleForm> {
                     const Icon(Icons.terminal,
                         size: 14, color: AppColors.onSurfaceVariant),
                     const SizedBox(width: 6),
-                    Text('flutter_contact_controller.dart',
+                    Text('Share your details',
                         style: TextStyle(
                             fontSize: 12,
                             color: AppColors.onSurfaceVariant,
@@ -202,7 +202,7 @@ class _ConsoleFormState extends State<_ConsoleForm> {
                           controller: _nameController);
                       final emailField = _ConsoleField(
                           label: 'Email',
-                          hint: 'dev@universe.io',
+                          hint: 'your.email@example.com',
                           controller: _emailController);
                       if (isWide) {
                         return Row(
@@ -292,9 +292,7 @@ class _ConsoleFormState extends State<_ConsoleForm> {
                     Align(
                       alignment: Alignment.centerRight,
                       child: _PrimaryButton(
-                        label: _isSubmitting
-                            ? 'Transmitting...'
-                            : 'Dispatch Signal',
+                        label: _isSubmitting ? 'Sending...' : 'Send Message',
                         icon: _isSubmitting
                             ? const SizedBox(
                                 width: 18,
@@ -451,6 +449,13 @@ class _ProjectTypeOption extends StatelessWidget {
   }
 }
 
+Future<void> launchURL(String url) async {
+  final uri = Uri.parse(url);
+  if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+    throw Exception('Could not launch $url');
+  }
+}
+
 class _ContactSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -495,10 +500,28 @@ class _ContactSidebar extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               ...[
-                ('GitHub', Icons.code_outlined),
-                ('LinkedIn', Icons.hub_outlined),
-                ('Email', Icons.mail_outline),
-              ].map((item) => _SocialLink(item.$1, item.$2)),
+                (
+                  'GitHub',
+                  Icons.code_outlined,
+                  () {
+                    launchURL("https://github.com/Afees01");
+                  }
+                ),
+                (
+                  'LinkedIn',
+                  Icons.hub_outlined,
+                  () {
+                    launchURL("https://linkedin.com/in/afees-k-a");
+                  }
+                ),
+                (
+                  'Email',
+                  Icons.mail_outline,
+                  () {
+                    launchURL("mailto:afeesasbin@gmail.com");
+                  }
+                ),
+              ].map((item) => _SocialLink(item.$1, item.$2, item.$3)),
             ],
           ),
         ),
@@ -511,33 +534,39 @@ class _ContactSidebar extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Support the SDK',
+              Text('Support the work',
                   style: AppTextStyles.titleLg
                       .copyWith(color: AppColors.tertiary)),
               const SizedBox(height: 8),
               Text(
-                  'Fuel maintenance of open-source Flutter packages and community tooling.',
+                  'Help me keep building open-source tools and polished Flutter apps.',
                   style: AppTextStyles.bodyMd),
               const SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  decoration: BoxDecoration(
-                    color: AppColors.tertiary,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.favorite, color: Colors.black, size: 18),
-                      const SizedBox(width: 8),
-                      Text('Buy me a Coffee',
-                          style: AppTextStyles.titleLg.copyWith(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700)),
-                    ],
+                child: GestureDetector(
+                  onTap: () {
+                    launchURL("https://buymeacoffee.com/afees");
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    decoration: BoxDecoration(
+                      color: AppColors.tertiary,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.favorite,
+                            color: Colors.black, size: 18),
+                        const SizedBox(width: 8),
+                        Text('Buy me a Coffee',
+                            style: AppTextStyles.titleLg.copyWith(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700)),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -577,28 +606,32 @@ class _ContactSidebar extends StatelessWidget {
 class _SocialLink extends StatelessWidget {
   final String label;
   final IconData icon;
-  const _SocialLink(this.label, this.icon);
+  final VoidCallback? onTap;
+  const _SocialLink(this.label, this.icon, this.onTap);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        color: AppColors.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0x0DFFFFFF)),
-      ),
-      child: Row(
-        children: [
-          Icon(icon, size: 18, color: AppColors.onSurfaceVariant),
-          const SizedBox(width: 12),
-          Text(label.toUpperCase(),
-              style:
-                  AppTextStyles.labelSm.copyWith(color: AppColors.onSurface)),
-          const Spacer(),
-          const Icon(Icons.north_east,
-              size: 16, color: AppColors.onSurfaceVariant),
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: AppColors.surfaceContainerLow,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: const Color(0x0DFFFFFF)),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, size: 18, color: AppColors.onSurfaceVariant),
+            const SizedBox(width: 12),
+            Text(label.toUpperCase(),
+                style:
+                    AppTextStyles.labelSm.copyWith(color: AppColors.onSurface)),
+            const Spacer(),
+            const Icon(Icons.north_east,
+                size: 16, color: AppColors.onSurfaceVariant),
+          ],
+        ),
       ),
     );
   }

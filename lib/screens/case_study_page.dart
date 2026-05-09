@@ -56,8 +56,8 @@ class _CaseStudyHero extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-           Text(
-            'A high-performance Flutter application bridging the gap between desktop-grade financial analysis and mobile convenience — delivering consistent experiences across iOS, Android, and Web.',
+          Text(
+            'A Flutter app that brings powerful financial tools to both mobile and desktop users, with smooth, consistent experiences everywhere.',
             style: AppTextStyles.bodyMd,
           ),
           const SizedBox(height: 24),
@@ -97,7 +97,7 @@ class _MultiPlatformChallenge extends StatelessWidget {
               Text('The Multi-Platform Challenge',
                   style: AppTextStyles.headlineMd),
               const SizedBox(height: 16),
-               Text(
+              Text(
                 'The primary goal was to achieve 100% pixel-perfect UI parity across diverse form factors while maintaining platform-specific behaviors. By leveraging Flutter\'s rendering engine, we bypassed limitations of platform-native views.',
                 style: AppTextStyles.bodyMd,
               ),
@@ -259,8 +259,7 @@ class _ArchitectureCard extends StatelessWidget {
                     color: AppColors.primary, size: 20),
               ),
               const SizedBox(width: 12),
-              Text('Clean Architecture & BLoC',
-                  style: AppTextStyles.titleLg),
+              Text('Clean Architecture & BLoC', style: AppTextStyles.titleLg),
             ],
           ),
           const SizedBox(height: 16),

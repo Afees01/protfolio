@@ -71,7 +71,7 @@ class _HeroText extends StatelessWidget {
               _PulsingDot(color: AppColors.secondaryContainer),
               const SizedBox(width: 8),
               Text(
-                'OPEN FOR NEW PROJECTS',
+                'READY TO BUILD TOGETHER',
                 style: AppTextStyles.labelSm.copyWith(
                   color: AppColors.secondaryContainer,
                 ),
@@ -106,7 +106,7 @@ class _HeroText extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
-          'Passionate Flutter developer with 1.2+ years of experience building responsive, user-friendly cross-platform mobile applications for Android and iOS. Specialized in Firebase, Supabase, BLoC state management, and modern UI design.',
+          'I build clean, reliable Flutter apps for Android and iOS, with a focus on friendly UI, efficient backends, and maintainable BLoC architecture.',
           style: AppTextStyles.bodyMd,
         ),
         const SizedBox(height: 32),
