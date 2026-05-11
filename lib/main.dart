@@ -19,7 +19,6 @@ void main() {
   runApp(const FlutterArchitectApp());
 }
 
-// ─────────────────────────── APP ROOT ───────────────────────────
 class FlutterArchitectApp extends StatelessWidget {
   const FlutterArchitectApp({super.key});
 

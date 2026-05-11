@@ -40,8 +40,19 @@ dependencies:
   cupertino_icons: ^1.0.8
   bloc: ^8.1.4
   google_fonts: ^6.3.0
+  flutter_launcher_icons: ^0.14.4
   
+flutter_launcher_icons:
+  android: true
+  ios: true
+  web:
+    generate: true
+    image_path: "assets/image/Icon.jpg"
+    background_color: "#0F172A"
+    theme_color: "#2563EB"
 
+  image_path: "assets/image/Icon.jpg"
+  min_sdk_android: 21
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,6 +78,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/pdf/CV.pdf
+    - assets/images
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
