@@ -18,8 +18,8 @@ class CaseStudyPage extends StatelessWidget {
             const SizedBox(height: 64),
             _MetricsBento(),
             const SizedBox(height: 64),
-            _VisualGallery(),
-            const SizedBox(height: 64),
+            // _VisualGallery(),
+            // const SizedBox(height: 64),
             _CTASection(),
             const SizedBox(height: 80),
           ],
@@ -401,93 +401,93 @@ class _MetricCard extends StatelessWidget {
   }
 }
 
-class _VisualGallery extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final colors = [
-      [AppColors.primaryContainer, AppColors.secondary],
-      [AppColors.tertiaryContainer, AppColors.tertiary],
-      [AppColors.primaryContainer, AppColors.primary],
-      [const Color(0xFF1A2B44), AppColors.secondaryContainer],
-    ];
+// class _VisualGallery extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     final colors = [
+//       [AppColors.primaryContainer, AppColors.secondary],
+//       [AppColors.tertiaryContainer, AppColors.tertiary],
+//       [AppColors.primaryContainer, AppColors.primary],
+//       [const Color(0xFF1A2B44), AppColors.secondaryContainer],
+//     ];
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            const Expanded(
-              child: _SectionHeader(
-                label: 'Gallery',
-                title: 'Visual Architecture',
-                subtitle: 'Exploring interface logic across different screens',
-              ),
-            ),
-            GlassCard(
-              borderRadius: BorderRadius.circular(8),
-              padding: const EdgeInsets.all(4),
-              child: Row(
-                children: ['Mobile', 'Tablet', 'Web'].map((t) {
-                  final active = t == 'Mobile';
-                  return Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                    decoration: active
-                        ? BoxDecoration(
-                            color: AppColors.primaryContainer,
-                            borderRadius: BorderRadius.circular(6),
-                          )
-                        : null,
-                    child: Text(t,
-                        style: AppTextStyles.labelSm.copyWith(
-                          color: active
-                              ? Colors.white
-                              : AppColors.onSurfaceVariant,
-                          fontWeight:
-                              active ? FontWeight.w700 : FontWeight.w500,
-                        )),
-                  );
-                }).toList(),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 24),
-        SizedBox(
-          height: 300,
-          child: Row(
-            children: List.generate(4, (i) {
-              return Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: i == 0 ? 0 : 8,
-                    top: i.isOdd ? 24 : 0,
-                  ),
-                  child: GlassCard(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors:
-                              colors[i].map((c) => c.withOpacity(0.4)).toList(),
-                        ),
-                      ),
-                      child: _MockMobileApp(),
-                    ),
-                  ),
-                ),
-              );
-            }),
-          ),
-        ),
-      ],
-    );
-  }
-}
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Row(
+//           crossAxisAlignment: CrossAxisAlignment.end,
+//           children: [
+//             const Expanded(
+//               child: _SectionHeader(
+//                 label: 'Gallery',
+//                 title: 'Visual Architecture',
+//                 subtitle: 'Exploring interface logic across different screens',
+//               ),
+//             ),
+//             GlassCard(
+//               borderRadius: BorderRadius.circular(8),
+//               padding: const EdgeInsets.all(4),
+//               child: Row(
+//                 children: ['Mobile', 'Tablet', 'Web'].map((t) {
+//                   final active = t == 'Mobile';
+//                   return Container(
+//                     padding:
+//                         const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+//                     decoration: active
+//                         ? BoxDecoration(
+//                             color: AppColors.primaryContainer,
+//                             borderRadius: BorderRadius.circular(6),
+//                           )
+//                         : null,
+//                     child: Text(t,
+//                         style: AppTextStyles.labelSm.copyWith(
+//                           color: active
+//                               ? Colors.white
+//                               : AppColors.onSurfaceVariant,
+//                           fontWeight:
+//                               active ? FontWeight.w700 : FontWeight.w500,
+//                         )),
+//                   );
+//                 }).toList(),
+//               ),
+//             ),
+//           ],
+//         ),
+//         const SizedBox(height: 24),
+//         SizedBox(
+//           height: 300,
+//           child: Row(
+//             children: List.generate(4, (i) {
+//               return Expanded(
+//                 child: Padding(
+//                   padding: EdgeInsets.only(
+//                     left: i == 0 ? 0 : 8,
+//                     top: i.isOdd ? 24 : 0,
+//                   ),
+//                   child: GlassCard(
+//                     borderRadius: BorderRadius.circular(16),
+//                     child: Container(
+//                       decoration: BoxDecoration(
+//                         borderRadius: BorderRadius.circular(16),
+//                         gradient: LinearGradient(
+//                           begin: Alignment.topCenter,
+//                           end: Alignment.bottomCenter,
+//                           colors:
+//                               colors[i].map((c) => c.withOpacity(0.4)).toList(),
+//                         ),
+//                       ),
+//                       child: _MockMobileApp(),
+//                     ),
+//                   ),
+//                 ),
+//               );
+//             }),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 class _CTASection extends StatelessWidget {
   @override
@@ -518,18 +518,30 @@ class _CTASection extends StatelessWidget {
               style: AppTextStyles.bodyMd,
             ),
             const SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 12,
+              runSpacing: 12,
               children: [
                 _PrimaryButton(
+                  onTap: () {
+                    launchURL("https://github.com/Afees01");
+                  },
                   label: 'Explore Codebase',
-                  icon:
-                      const Icon(Icons.terminal, color: Colors.white, size: 18),
+                  icon: const Icon(
+                    Icons.terminal,
+                    color: Colors.white,
+                    size: 18,
+                  ),
                 ),
-                const SizedBox(width: 20),
-                const _GhostButton(label: 'Documentation'),
+                _GhostButton(
+                  label: 'Documentation',
+                  onTap: () {
+                    launchURL("https://docs.flutter.dev");
+                  },
+                ),
               ],
-            ),
+            )
           ],
         ),
       ),

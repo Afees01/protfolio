@@ -178,8 +178,12 @@ class _AvatarPlaceholder extends StatelessWidget {
 }
 
 class _WidgetTree extends StatelessWidget {
+  const _WidgetTree();
+
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     final skills = [
       (
         'Visual Design',
@@ -191,7 +195,11 @@ class _WidgetTree extends StatelessWidget {
         'API & Data',
         Icons.api_outlined,
         AppColors.secondary,
-        ['RESTful services', 'Firebase integration', 'Clean data flows']
+        [
+          'RESTful services',
+          'Firebase integration',
+          'Clean data flows',
+        ]
       ),
       (
         'App State',
@@ -203,80 +211,142 @@ class _WidgetTree extends StatelessWidget {
         'Data & Storage',
         Icons.storage_outlined,
         AppColors.error,
-        ['Firestore sync', 'Local caching', 'Real-time updates']
+        [
+          'Firestore sync',
+          'Local caching',
+          'Real-time updates',
+          'MySQL databases',
+          'Supabase integration'
+        ]
       ),
     ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _SectionHeader(
+        _SectionHeader(
           label: 'Skills',
           title: 'What I Build',
           subtitle:
               'Flutter strengths focused on clean design, reliable APIs, and smooth app behavior.',
         ),
-        const SizedBox(height: 24),
-        LayoutBuilder(builder: (ctx, constraints) {
-          final cols = constraints.maxWidth > 800
-              ? 4
-              : constraints.maxWidth > 500
-                  ? 2
-                  : 1;
-          return GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: cols,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 16,
-              mainAxisExtent: 200,
-            ),
-            itemCount: skills.length,
-            itemBuilder: (_, i) {
-              final s = skills[i];
-              return Container(
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  color: AppColors.surfaceContainerLow.withOpacity(0.6),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border(
-                    top: BorderSide(color: s.$3, width: 2),
-                    left: BorderSide(color: Colors.white.withOpacity(0.06)),
-                    right: BorderSide(color: Colors.white.withOpacity(0.06)),
-                    bottom: BorderSide(color: Colors.white.withOpacity(0.06)),
+        SizedBox(height: width < 600 ? 20 : 32),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            int columns = 1;
+
+            if (constraints.maxWidth > 1200) {
+              columns = 4;
+            } else if (constraints.maxWidth > 800) {
+              columns = 2;
+            } else {
+              columns = 1;
+            }
+
+            return GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: skills.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: columns,
+                crossAxisSpacing: 18,
+                mainAxisSpacing: 18,
+                childAspectRatio: width < 600 ? 1.15 : 1.05,
+              ),
+              itemBuilder: (_, i) {
+                final s = skills[i];
+
+                return Container(
+                  padding: EdgeInsets.all(
+                    width < 600 ? 18 : 24,
                   ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(s.$2, color: s.$3, size: 32),
-                    const SizedBox(height: 12),
-                    Text(s.$1,
-                        style: AppTextStyles.titleLg.copyWith(fontSize: 16)),
-                    const SizedBox(height: 12),
-                    ...s.$4.map((item) => Padding(
-                          padding: const EdgeInsets.only(bottom: 4),
-                          child: Row(
-                            children: [
-                              Container(
-                                  width: 5,
-                                  height: 5,
-                                  decoration: BoxDecoration(
-                                      color: s.$3, shape: BoxShape.circle)),
-                              const SizedBox(width: 8),
-                              Text(item,
-                                  style: AppTextStyles.bodyMd
-                                      .copyWith(fontSize: 12)),
-                            ],
+                  decoration: BoxDecoration(
+                    color: AppColors.surfaceContainerLow.withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(18),
+                    border: Border.all(
+                      color: Colors.white.withOpacity(0.08),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: width < 600 ? 48 : 56,
+                        height: width < 600 ? 48 : 56,
+                        decoration: BoxDecoration(
+                          color: s.$3.withOpacity(0.12),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: Icon(
+                          s.$2,
+                          color: s.$3,
+                          size: width < 600 ? 24 : 30,
+                        ),
+                      ),
+                      SizedBox(
+                        height: width < 600 ? 16 : 20,
+                      ),
+                      Text(
+                        s.$1,
+                        style: AppTextStyles.titleLg.copyWith(
+                          fontSize: width < 600 ? 16 : 18,
+                        ),
+                      ),
+                      SizedBox(
+                        height: width < 600 ? 12 : 16,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: s.$4.map<Widget>((item) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 6),
+                                    width: 6,
+                                    height: 6,
+                                    decoration: BoxDecoration(
+                                      color: s.$3,
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: Text(
+                                      item,
+                                      style: AppTextStyles.bodyMd.copyWith(
+                                        fontSize: width < 600 ? 12 : 13,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: LinearProgressIndicator(
+                          value: 0.85,
+                          minHeight: 6,
+                          backgroundColor: Colors.white.withOpacity(0.05),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            s.$3,
                           ),
-                        )),
-                  ],
-                ),
-              );
-            },
-          );
-        }),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+        ),
       ],
     );
   }
@@ -362,7 +432,7 @@ class _TimelineCard extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  width: 12,
+                  width: 14,
                   height: 12,
                   decoration: BoxDecoration(
                     color: item.color,

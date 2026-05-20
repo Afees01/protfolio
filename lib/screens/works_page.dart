@@ -1,6 +1,5 @@
 part of '../main.dart';
 
-
 // ─────────────────────────── WORKS PAGE ───────────────────────────
 class WorksPage extends StatefulWidget {
   const WorksPage({super.key});
@@ -10,32 +9,32 @@ class WorksPage extends StatefulWidget {
 
 class _WorksPageState extends State<WorksPage> {
   int _filterIndex = 0;
-  final _filters = ['All', 'Mobile', 'Web', 'Desktop', 'Open Source'];
+  final _filters = ['All', 'Mobile', 'Web', 'Desktop', 'Open Source', 'Tablet'];
 
   final _projects = [
     _ProjectData(
         'Event Management App',
         'Full-stack Flutter application with Node.js backend, MySQL database. Role-based system for admin and users with RESTful APIs, token-based authentication, and image upload functionality.',
         96,
-        ['Mobile'],
+        ['Mobile', 'Web', 'Open Source'],
         [Icons.smartphone_outlined]),
     _ProjectData(
         'Todo App',
         'Full-stack mobile Todo application using Flutter with BLoC state management. Firebase Authentication and Supabase integration for real-time CRUD operations and task management.',
         94,
-        ['Mobile'],
+        ['Mobile', 'Web', 'Open Source'],
         [Icons.smartphone_outlined]),
     _ProjectData(
         'Appointment Viewer',
         'Flutter membership app with subscription management and therapist appointment booking. Custom checkout flow for digital product purchases and membership upgrades.',
         92,
-        ['Mobile'],
+        ['Mobile', 'Web'],
         [Icons.smartphone_outlined]),
     _ProjectData(
         'Consent Form Application',
         'Flutter tablet app for patient document signing and digital declarations. Integrated signature capture, secure data handling, and responsive tablet design for hospital use.',
         93,
-        ['Mobile'],
+        ['Mobile', 'Web', 'Tablet'],
         [Icons.tablet_outlined]),
     _ProjectData(
         'Call Patient App',
