@@ -15,8 +15,8 @@ class HomePage extends StatelessWidget {
             _HeroSection(),
             const SizedBox(height: 64),
             _TechStackSection(),
-            const SizedBox(height: 64),
-            _FeaturedProjectSection(),
+            // const SizedBox(height: 64),
+            // _FeaturedProjectSection(),
             const SizedBox(height: 64),
             _ExpertiseSection(),
             const SizedBox(height: 80),
@@ -436,11 +436,12 @@ class _TechStackSection extends StatelessWidget {
           'Real-time database, authentication, and cloud functions.',
           ['Firestore', 'Cloud Messaging']),
       _TechCard(
-          'Riverpod',
-          Icons.account_tree_outlined,
-          AppColors.secondary,
-          'Compile-time safe, highly testable state management.',
-          ['Providers', 'StateNotifier']),
+        'BLoC',
+        Icons.account_tree_outlined,
+        AppColors.secondary,
+        'Reactive and maintainable state management architecture for scalable Flutter apps.',
+        ['Cubit', 'flutter_bloc'],
+      ),
     ];
 
     return Column(
@@ -535,67 +536,67 @@ class _TechCardState extends State<_TechCard> {
   }
 }
 
-class _FeaturedProjectSection extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GlassCard(
-      borderRadius: BorderRadius.circular(32),
-      child: LayoutBuilder(builder: (ctx, constraints) {
-        final isWide = constraints.maxWidth > 700;
-        final content = _FeaturedProjectContent();
-        final image = Container(
-          height: isWide ? null : 200,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                AppColors.primaryContainer.withOpacity(0.5),
-                AppColors.surfaceContainerHigh,
-              ],
-            ),
-          ),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              _MockDashboard(),
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin:
-                        isWide ? Alignment.centerRight : Alignment.bottomCenter,
-                    end: isWide ? Alignment.centerLeft : Alignment.topCenter,
-                    colors: [
-                      Colors.transparent,
-                      AppColors.surfaceContainerLowest.withOpacity(0.8)
-                    ],
-                  ),
-                ),
-              ),
-              const Positioned(
-                bottom: 24,
-                left: 24,
-                child: _FeaturedBadge(),
-              ),
-            ],
-          ),
-        );
+// class _FeaturedProjectSection extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return GlassCard(
+//       borderRadius: BorderRadius.circular(32),
+//       child: LayoutBuilder(builder: (ctx, constraints) {
+//         final isWide = constraints.maxWidth > 700;
+//         final content = _FeaturedProjectContent();
+//         final image = Container(
+//           height: isWide ? null : 200,
+//           decoration: BoxDecoration(
+//             gradient: LinearGradient(
+//               begin: Alignment.topLeft,
+//               end: Alignment.bottomRight,
+//               colors: [
+//                 AppColors.primaryContainer.withOpacity(0.5),
+//                 AppColors.surfaceContainerHigh,
+//               ],
+//             ),
+//           ),
+//           child: Stack(
+//             fit: StackFit.expand,
+//             children: [
+//               _MockDashboard(),
+//               Container(
+//                 decoration: BoxDecoration(
+//                   gradient: LinearGradient(
+//                     begin:
+//                         isWide ? Alignment.centerRight : Alignment.bottomCenter,
+//                     end: isWide ? Alignment.centerLeft : Alignment.topCenter,
+//                     colors: [
+//                       Colors.transparent,
+//                       AppColors.surfaceContainerLowest.withOpacity(0.8)
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//               const Positioned(
+//                 bottom: 24,
+//                 left: 24,
+//                 child: _FeaturedBadge(),
+//               ),
+//             ],
+//           ),
+//         );
 
-        if (isWide) {
-          return IntrinsicHeight(
-            child: Row(
-              children: [
-                Expanded(flex: 3, child: image),
-                Expanded(flex: 2, child: content),
-              ],
-            ),
-          );
-        }
-        return Column(children: [image, content]);
-      }),
-    );
-  }
-}
+//         if (isWide) {
+//           return IntrinsicHeight(
+//             child: Row(
+//               children: [
+//                 Expanded(flex: 3, child: image),
+//                 Expanded(flex: 2, child: content),
+//               ],
+//             ),
+//           );
+//         }
+//         return Column(children: [image, content]);
+//       }),
+//     );
+//   }
+// }
 
 class _FeaturedBadge extends StatelessWidget {
   const _FeaturedBadge();
@@ -616,51 +617,51 @@ class _FeaturedBadge extends StatelessWidget {
   }
 }
 
-class _FeaturedProjectContent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(40),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Zenith Fintech Suite', style: AppTextStyles.headlineMd),
-          const SizedBox(height: 12),
-          Text(
-            'A comprehensive wealth management platform built from the ground up using Flutter. Features complex real-time charting, biometric security, and multi-currency support.',
-            style: AppTextStyles.bodyMd,
-          ),
-          const SizedBox(height: 24),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              _Chip(label: 'Dart 3.0', color: AppColors.secondary),
-              _Chip(label: 'Isolates', color: AppColors.secondary),
-              _Chip(label: 'gRPC', color: AppColors.secondary),
-            ],
-          ),
-          const SizedBox(height: 24),
-          Row(
-            children: [
-              Expanded(
-                child: _PrimaryButton(
-                  label: 'GitHub',
-                  icon: const Icon(Icons.code, color: Colors.white, size: 16),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: _GhostButton(label: 'Web Demo'),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
+// class _FeaturedProjectContent extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.all(40),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           Text('Zenith Fintech Suite', style: AppTextStyles.headlineMd),
+//           const SizedBox(height: 12),
+//           Text(
+//             'A comprehensive wealth management platform built from the ground up using Flutter. Features complex real-time charting, biometric security, and multi-currency support.',
+//             style: AppTextStyles.bodyMd,
+//           ),
+//           const SizedBox(height: 24),
+//           Wrap(
+//             spacing: 8,
+//             runSpacing: 8,
+//             children: [
+//               _Chip(label: 'Dart 3.0', color: AppColors.secondary),
+//               _Chip(label: 'Isolates', color: AppColors.secondary),
+//               _Chip(label: 'gRPC', color: AppColors.secondary),
+//             ],
+//           ),
+//           const SizedBox(height: 24),
+//           Row(
+//             children: [
+//               Expanded(
+//                 child: _PrimaryButton(
+//                   label: 'GitHub',
+//                   icon: const Icon(Icons.code, color: Colors.white, size: 16),
+//                 ),
+//               ),
+//               const SizedBox(width: 12),
+//               Expanded(
+//                 child: _GhostButton(label: 'Web Demo'),
+//               ),
+//             ],
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class _ExpertiseSection extends StatelessWidget {
   @override

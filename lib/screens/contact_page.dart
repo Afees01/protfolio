@@ -50,6 +50,7 @@ class _ConsoleForm extends StatefulWidget {
 class _ConsoleFormState extends State<_ConsoleForm> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _messageController = TextEditingController();
   bool _isSubmitting = false;
   bool _isSuccess = false;
@@ -58,6 +59,7 @@ class _ConsoleFormState extends State<_ConsoleForm> {
   void dispose() {
     _nameController.dispose();
     _emailController.dispose();
+    _phoneController.dispose();
     _messageController.dispose();
     super.dispose();
   }
@@ -65,6 +67,7 @@ class _ConsoleFormState extends State<_ConsoleForm> {
   void _dispatchSignal() async {
     if (_nameController.text.trim().isEmpty ||
         _emailController.text.trim().isEmpty ||
+        _phoneController.text.trim().isEmpty ||
         _messageController.text.trim().isEmpty) {
       showDialog(
         context: context,
@@ -90,45 +93,83 @@ class _ConsoleFormState extends State<_ConsoleForm> {
       _isSubmitting = true;
       _isSuccess = false;
     });
+    try {
+      await ContactService.sendEmail(
+        name: _nameController.text,
+        email: _emailController.text,
+        phone: _phoneController.text,
+        message: _messageController.text,
+        categories: widget.projectType == -1
+            ? 'Not specified'
+            : (widget.projectType == 0
+                ? 'App from Scratch'
+                : (widget.projectType == 1 ? 'UI Refactor' : 'Consultation')),
+      );
 
-    // Simulate network delay
-    await Future.delayed(const Duration(seconds: 2));
-
-    if (mounted) {
-      setState(() {
-        _isSubmitting = false;
-        _isSuccess = true;
-      });
-      _nameController.clear();
-      _emailController.clear();
-      _messageController.clear();
-      widget.onProjectType(-1);
-
-      showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          backgroundColor: AppColors.surfaceContainerHigh,
-          title: const Text('Success',
-              style: TextStyle(color: AppColors.secondary)),
-          content: const Text(
-              'Your message has been sent! I’ll review it and reply soon.',
-              style: TextStyle(color: Colors.white)),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('CLOSE',
-                  style: TextStyle(color: AppColors.primary)),
-            ),
-          ],
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Message Sent'),
         ),
       );
 
-      // Reset success status after a few seconds
-      Future.delayed(const Duration(seconds: 5), () {
-        if (mounted) {
-          setState(() => _isSuccess = false);
-        }
-      });
+      if (mounted) {
+        setState(() {
+          _isSubmitting = false;
+          _isSuccess = true;
+        });
+        _nameController.clear();
+        _emailController.clear();
+        _phoneController.clear();
+        _messageController.clear();
+        widget.onProjectType(-1);
+
+        showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            backgroundColor: AppColors.surfaceContainerHigh,
+            title: const Text('Success',
+                style: TextStyle(color: AppColors.secondary)),
+            content: const Text(
+                'Your message has been sent! I\'ll review it and reply soon.',
+                style: TextStyle(color: Colors.white)),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: const Text('CLOSE',
+                    style: TextStyle(color: AppColors.primary)),
+              ),
+            ],
+          ),
+        );
+        Future.delayed(const Duration(seconds: 5), () {
+          if (mounted) {
+            setState(() => _isSuccess = false);
+          }
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isSubmitting = false;
+        });
+        showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            backgroundColor: AppColors.surfaceContainerHigh,
+            title:
+                const Text('Error', style: TextStyle(color: AppColors.error)),
+            content: Text('Failed to send message: $e',
+                style: const TextStyle(color: Colors.white)),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: const Text('ACKNOWLEDGE',
+                    style: TextStyle(color: AppColors.primary)),
+              ),
+            ],
+          ),
+        );
+      }
     }
   }
 
@@ -204,19 +245,32 @@ class _ConsoleFormState extends State<_ConsoleForm> {
                           label: 'Email',
                           hint: 'your.email@example.com',
                           controller: _emailController);
+                      final phoneField = _ConsoleField(
+                          label: 'Phone',
+                          hint: '+1 (555) 123-4567',
+                          controller: _phoneController);
                       if (isWide) {
-                        return Row(
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(child: nameField),
-                            const SizedBox(width: 24),
-                            Expanded(child: emailField),
+                            Row(
+                              children: [
+                                Expanded(child: nameField),
+                                const SizedBox(width: 24),
+                                Expanded(child: emailField),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                            phoneField,
                           ],
                         );
                       }
                       return Column(children: [
                         nameField,
                         const SizedBox(height: 20),
-                        emailField
+                        emailField,
+                        const SizedBox(height: 20),
+                        phoneField,
                       ]);
                     }),
                     const SizedBox(height: 28),
